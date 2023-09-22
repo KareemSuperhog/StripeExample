@@ -53,9 +53,10 @@ namespace StripeExample
         {
             var paymentIntentService = new PaymentIntentService();
             var customerService = new CustomerService();
+            var customer = customerService.Create(new CustomerCreateOptions());
             var paymentIntent = paymentIntentService.Create(new PaymentIntentCreateOptions
             {
-                Customer = "cus_OgQ4sNG80kkVsO",
+                Customer = customer.Id,
                 Amount = CalculateOrderAmount(request.Items),
                 Currency = "gbp",
                 // In the latest version of the API, specifying the `automatic_payment_methods` parameter is optional because Stripe enables its functionality by default.
